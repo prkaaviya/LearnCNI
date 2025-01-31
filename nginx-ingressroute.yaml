@@ -1,0 +1,15 @@
+# nginx-ingressrouter.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: nginx-ingress
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    passthrough: true
+  routes:
+    - match: HostSNI(`demoapp.nginx`)
+      services:
+        - name: nginx-service
+          port: 443
